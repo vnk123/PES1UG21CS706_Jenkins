@@ -4,10 +4,20 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                checkout([$class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/vnk123/PES1UG21CS706_Jenkins.git']],
-                ])
+                script {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: 'main']],
+                        userRemoteConfigs: [[url: 'https://github.com/vnk123/PES1UG21CS706_Jenkins.git']],
+                    ])
+                }
+            }
+        }
+
+        stage('Debug') {
+            steps {
+                script {
+                    sh 'ls -R'
+                }
             }
         }
 
