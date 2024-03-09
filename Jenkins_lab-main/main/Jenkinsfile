@@ -7,34 +7,39 @@ pipeline {
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/main']],
                     userRemoteConfigs: [[url: 'https://github.com/vnk123/PES1UG21CS706_Jenkins.git']],
-                    scriptPath: 'Jenkins_lab-main/main/Jenkinsfile'
+                    scriptPath: 'Jenkins_lab-main/main'
                 ])
             }
         }
 
         stage('Build') {
             steps {
-                build 'PES1UG21CS706-1'
-                sh 'g++ hello.cpp -o output'
+                script {
+                    sh 'g++ hello.cpp -o output'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh './output'
+                script {
+                    sh './output'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'deploy'
+                script {
+                    echo 'Deployment step'
+                }
             }
         }
     }
 
     post {
         failure {
-            error 'Pipeline failed'
+            echo 'Pipeline failed'
         }
     }
 }
