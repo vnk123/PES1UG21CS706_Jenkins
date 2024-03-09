@@ -16,8 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Introduce intentional error in the build stage
-                    sh 'g++ Jenkins_lab-main/main/hello.cpp -o output_with_error'
+                    sh 'g++ Jenkins_lab-main/main/hello.cpp -o output'
                 }
             }
         }
